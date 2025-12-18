@@ -6,20 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <style>
-            /* ---------- Root */
             :root {
                 --basic-colour-0: #fafafa;
-                --basic-colour-1: #f0f0f0;
-                --basic-colour-2: #ddd;
-                --basic-colour-3: #636363;
-                --basic-colour-4: #252525;
                 --basic-colour-5: #2196f3;
                 --basic-colour-6: #005fad;
-                --basic-colour-7: #ffc2bd;
-                --basic-colour-8: #f44336;
             }
-
-            /* ---------- General */
             body {
                 font-family: 'Courier New';
                 max-width: 75rem;
@@ -27,7 +18,6 @@
                 padding: 0.6rem 3rem 1.8rem 3rem;
                 background-color: var(--basic-colour-0);
             }
-
             a {
                 color: var(--basic-colour-5);
                 text-decoration: none;
@@ -35,12 +25,9 @@
             a:visited {
                 color: var(--basic-colour-5);  /* prevent turning purple */
             }
-
             h1 {
                 text-align: center;
             }
-
-            /* Knots page */
             .knots {
                 display: flex;
                 flex-direction: column;
@@ -55,7 +42,6 @@
                 margin-top: 2rem;
                 font-size: 1rem;
             }
-
             .videowrapper {
                 position: relative;
                 width: 60%;
@@ -66,7 +52,6 @@
                 background: #000;         /* fond neutre en attendant le chargement */
                 border-radius: 8px;       /* optionnel : angles arrondis */
             }
-
             .videowrapper iframe {
                 width: 100%;
                 height: 100%;
@@ -75,8 +60,6 @@
                 object-fit: contain;      /* important : ne croppe pas l'image */
                 background: #000;         /* évite les bandes blanches au chargement */
             }
-
-            /* Collapsibles */
             details {
                 display: flex;
                 flex-direction: column;
@@ -85,7 +68,6 @@
                 border-radius: 1rem;
                 margin: 0.6rem 0rem;
             }
-
             details summary {
                 font-weight: bold;
                 cursor: pointer;
@@ -94,8 +76,6 @@
                 padding-top: 0.6rem;
                 padding-bottom: 0.2rem;
             }
-
-            /* Sous-sections collapsibles */
             .subsummary {
                 display: block;
                 padding-bottom: 0rem;
@@ -103,18 +83,13 @@
                 font-weight: bold;
                 cursor: pointer;
             }
-
-
-            /* Responsiveness */
             @media (max-width: 768px) {
                 body {
                     padding: 1rem;
                 }
-                
                 .videowrapper {
                     width: 100%;
                 }
-
                 details {
                     padding: 0.3rem 0.6rem 0.6rem 0.6rem !important;
                 }
@@ -825,3 +800,4 @@
 
     </body>
 </html>
+
