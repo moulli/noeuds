@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Nœuds</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style>
+            /* ---------- Root */
+            :root {
+                --basic-colour-0: #fafafa;
+                --basic-colour-1: #f0f0f0;
+                --basic-colour-2: #ddd;
+                --basic-colour-3: #636363;
+                --basic-colour-4: #252525;
+                --basic-colour-5: #2196f3;
+                --basic-colour-6: #005fad;
+                --basic-colour-7: #ffc2bd;
+                --basic-colour-8: #f44336;
+            }
+
+            /* ---------- General */
+            body {
+                font-family: 'Courier New';
+                max-width: 75rem;
+                margin: 0 auto;
+                padding: 0.6rem 3rem 1.8rem 3rem;
+                background-color: var(--basic-colour-0);
+            }
+
+            a {
+                color: var(--basic-colour-5);
+                text-decoration: none;
+            }
+            a:visited {
+                color: var(--basic-colour-5);  /* prevent turning purple */
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            /* Knots page */
+            .knots {
+                display: flex;
+                flex-direction: column;
+            }
+            .knots h2 {
+                margin-top: 1.5rem;
+                padding-bottom: 0rem;
+                margin-bottom: 0rem;
+                font-size: 1.1rem;
+            }
+            .knots h3 {
+                margin-top: 2rem;
+                font-size: 1rem;
+            }
+
+            .videowrapper {
+                position: relative;
+                width: 60%;
+                max-width: 960px;
+                margin: 1.5rem auto;
+                aspect-ratio: 16 / 9;     /* maintient le bon ratio automatiquement */
+                overflow: hidden;
+                background: #000;         /* fond neutre en attendant le chargement */
+                border-radius: 8px;       /* optionnel : angles arrondis */
+            }
+
+            .videowrapper iframe {
+                width: 100%;
+                height: 100%;
+                border: 0;
+                display: block;
+                object-fit: contain;      /* important : ne croppe pas l'image */
+                background: #000;         /* évite les bandes blanches au chargement */
+            }
+
+            /* Collapsibles */
+            details {
+                display: flex;
+                flex-direction: column;
+                border: 0.06rem solid var(--basic-colour-6);
+                padding: 0.3rem 1.2rem 0.6rem 1.2rem;
+                border-radius: 1rem;
+                margin: 0.6rem 0rem;
+            }
+
+            details summary {
+                font-weight: bold;
+                cursor: pointer;
+                font-size: 1.3rem;
+                list-style: none;
+                padding-top: 0.6rem;
+                padding-bottom: 0.2rem;
+            }
+
+            /* Sous-sections collapsibles */
+            .subsummary {
+                display: block;
+                padding-bottom: 0rem;
+                font-size: 1.1rem;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+
+            /* Responsiveness */
+            @media (max-width: 768px) {
+                body {
+                    padding: 1rem;
+                }
+                
+                .videowrapper {
+                    width: 100%;
+                }
+
+                details {
+                    padding: 0.3rem 0.6rem 0.6rem 0.6rem !important;
+                }
+                details ul {
+                    padding-left: 1.3rem;
+                }
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <h1>Les nœuds</h1>
+
+        <div class="knots">
+
+            <details open>
+                <summary>Les nœuds à connaître absolument</summary>
+                <ul>
+                    <li>Tous les nœuds de base, et en particulier le <a href="#noeud-coulant">nœuds coulant</a>, qui est ultra polyvalent.</li>
+                    <li>Pour faire une boucle fixe au bout d'une corde, le <a href="#noeud-chaise">nœud de chaise</a>. Sa déclinaison avec deux boucles, le <a href="#chaise-espagnol">nœud de chaise espagnol</a>.</li>
+                    <li>Pour faire une boucle coulante ultra facile au bout d'une corde, le <a href="#noeud-fauconnier">nœud de fauconnier</a>. Pour pouvoir ajuster la tension facilement, le <a href="#noeud-tendeur">nœud tendeur</a>.</li>
+                    <li>Pour faire une boucle au milieu d'une corde, le <a href="#noeud-papillon">nœud de papillon alpin</a>.</li>
+                    <li>Pour attacher une corde à une barre, et pouvoir la libérer facilement, le <a href="#noeud-cabestan">nœud de cabestan</a>. Pour pouvoir serrer fort et ne pas libérer facilement, le <a href="#noeud-meunier">nœud de meunier</a>.</li>
+                    <li>Pour attacher deux cordes entre elles, si elles ont le même diamètre, le <a href="#noeud-zeppelin">nœud de Zeppelin</a>. Si elles sont de diamètres différents, le <a href="#noeud-ecoute">nœud d'écoute</a>.</li>
+                    <li>Pour sécuriser un objet, le <a href="#noeud-trucker"><em>trucker's hitch</em></a>. Pour un serre-câble improvisé, le <a href="#noeud-jamhitch"><em>jam hitch</em></a>.</li>
+                    <li>Pour lier deux barres entre elles, le <a href="#transom-knot"><em>Transom knot</em></a>.</li>
+                    <li>Pour alourdir le bout d'un cordage, le <a href="#noeud-capucin">nœud de capucin</a>.</li>
+                    <li>Pour ranger du cordage trop long, la <a href="#chainette">chaînette</a>, ou le <a href="#zipper-sinnet">zipper sinnet</a>.</li>
+                    <li>Pour fabriquer un <a href="#filet">filet</a>.</li>
+                </ul>
+            </details>
+
+            <details open>
+                <summary>Mes nœuds préférés</summary>
+                <ul>
+                    <li><a href="#noeud-fauconnier">Le nœud de fauconnier</a></li>
+                    <li><a href="#noeud-papillon">Le papillon alpin</a></li>
+                    <li><a href="#noeud-meunier">Le nœud de meunier</a></li>
+                    <li><a href="#noeud-trucker"><em>Le trucker's hitch</em></a></li>
+                    <li><a href="#noeud-jamhitch"><em>Le jam hitch</em></a></li>
+                    <li><a href="#pomme-touline">La pomme de touline</a></li>
+                    <li><a href="#tete-turc">La famille des têtes de turc</a></li>
+                    <li><a href="#croix-chinoise">La croix chinoise</a></li>
+                    <li><a href="#solomon-bar">Le <em>Solomon bar</em></a></li>
+                    <li><a href="#snake-knot">Le <em>snake knot</em></a></li>
+                </ul>
+            </details>
+
+            <details>
+                <summary>1. Concepts de base</summary>
+
+                <h2>Vocabulaire essentiel</h2>
+                <ul>
+                    <li>La corde fixe, ou brin dormant (<em>Static line</em>) désigne la partie du cordage qui ne bouge pas.</li>
+                    <li>Le brin courant (<em>Running line</em>) est la partie du cordage qu'on manipule pour serrer ou desserrer un nœud.</li>
+                    <li>« Dresser » un nœud (<em>dress a knot</em>) consiste à ajuster chaque brin pour que le nœud soit bien formé, compact et solide.</li>
+                    <li>Une anse (ou ganse, <em>bight</em>) est une boucle ou un pli dans la corde sans croisement, souvent utilisée comme base pour former un nœud plus complexe.</li>
+                </ul>
+
+                <h2>Variations et adaptations</h2>
+                <ul>
+                    <li>De nombreux nœuds peuvent être <strong>doublés</strong> pour plus de sécurité ou pour éviter qu'ils ne se coincent trop fermement après usage.</li>
+                    <li>On peut aussi <strong>ajouter une petite boucle</strong> avant le serrage final pour faciliter le dénouement : une astuce très utile en camping ou en escalade, où la corde peut être mise sous tension.</li>
+                </ul>
+            </details>
+
+            <details>
+                <summary>2. Nœuds de base</summary>
+
+                <h3>Demi-clé (<em>Half hitch</em>)</h3>
+                <ul>
+                    <li>La demi-clé, ou demi-nœud, ou <em>half hitch</em> est l'un des nœuds les plus fondamentaux.</li>
+                    <li>Il sert à renforcer un nœud principal comme le cabestan, le grappin, ou le <em>round turn & two half hitches</em>.</li>
+                    <li>Deux demi-clés successives forment un <em>cow hitch</em>, tandis que le <em>girth hitch</em> est similaire mais avec tension sur les deux brins.</li>
+                    <li>Rapide et polyvalent, mais peu fiable seul.</li>
+                </ul>
+
+                <h3>Nœud simple (<em>Overhand knot</em>)</h3>
+                <ul>
+                    <li>Le <em>overhand knot</em> est le plus élémentaire des nœuds, souvent le premier que l'on apprend.</li>
+                    <li>Il se retrouve dans de nombreux nœuds plus complexes, notamment le Zeppelin.</li>
+                    <li>Il peut servir de nœud d'arrêt provisoire, mais devient difficile à défaire après forte tension.</li>
+                </ul>
+
+                <h3 id="noeud-coulant">Nœud coulant (<em>Slip knot</em>)</h3>
+                <ul>
+                    <li>Le <em>slip knot</em> se serre et se défait d'une simple traction.</li>
+                    <li>Attention à son orientation : mal placé, il peut se défaire de lui-même.</li>
+                    <li>Très pratique pour des systèmes de tension rapides ou la création d'échelles de corde.</li>
+                </ul>
+                <div class="videowrapper">
+                    <iframe loading="lazy" src="https://www.youtube.com/embed/tNa27oTiq4k?si=0Ed5kVq0CEJUP5zy&amp;start=161" title="noeud_coulant" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+
+                <h3>Nœud de huit (<em>Figure-eight knot</em>)</h3>
+                <ul>
+                    <li>Le <em>figure-eight knot</em> sert de nœud d'arrêt solide pour empêcher la corde de sortir d'un anneau.</li>
+                    <li>Plus volumineux que le nœud simple, mais plus facile à défaire après tension.</li>
+                    <li>Base du nœud de huit double et du nœud de chaise.</li>
+                </ul>
+            </details>
+
+            <details>
+                <summary>3. Nœuds simples</summary>
+
+                <details>
+                    <summary class="subsummary">3.1 Faire une boucle au bout d'une ligne</summary>
+
+                    <h3 id="noeud-chaise">Nœud de chaise (<em>Bowline</em>)</h3>
+                    <ul>
+                        <li><strong>"Le roi des nœuds".</strong></li>
+                        <li>Le <em>bowline</em> forme une boucle fixe qui ne glisse pas.</li>
+                        <li>Facile à faire et à défaire, même après charge importante.</li>
+                        <li>Existe en version double ou avec une corde pliée pour obtenir deux boucles.</li>
+                        <li>Très utilisé en navigation et en escalade.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/5lLPAHK_k6I?si=4EEaS4W0BgyOkA0O&amp;start=154" title="chaise_1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>Peut être fait classiquement selon la méthode “rabbit and the hole”, ou en partant d'un nœud coulant.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/1eIUZ_6QulY?si=A0cIH2fUWSjJmjMs" title="chaise_2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3 id="chaise-espagnol">Nœud de chaise espagnol</h3>
+                    <ul>
+                        <li>Comme un nœud de chaise, mais avec deux boucles (ajustables et qui ne coulissent pas).</li>
+                        <li>Peut être noué en milieu du cordage.</li>
+                        <li>Il faut mettre une charge égale sur les deux boucles.</li>
+                        <li>Peut être utilisé comme harnais.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/jl0dJ_gyE3M?si=ENdjac9DBHUai86C&amp;start=36" title="chaise_espagnol" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3 id="noeud-fauconnier">Nœud de fauconnier (<em>Falconer's knot</em>)</h3>
+                    <ul>
+                        <li>Très facile et rapide à faire et à défaire, même à une main.</li>
+                        <li>Coulisse sur la corde quand il est mis sous tension.</li>
+                        <li>Parfait pour un nœud à faire rapidement.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/FeRhYhxhzVE?si=UQ1mJDjSUNAbx180&amp;start=7" title="fauconnier" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3 id="noeud-tendeur">Nœud tendeur (<em>Taut-line hitch</em>)</h3>
+                    <ul>
+                        <li>Permet d'ajuster la tension d'une corde sans la détacher.</li>
+                        <li>Fonctionne comme un cabestan coulissant sur la corde fixe : glisse pour régler, bloque sous charge.</li>
+                        <li>Idéal pour tendre une bâche, une tente ou une ligne à linge.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/5lLPAHK_k6I?si=4EEaS4W0BgyOkA0O&amp;start=306" title="tendeur" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3>Nœud sibérien (<em>Siberian hitch</em>)</h3>
+                    <ul>
+                        <li>Nœud coulant rapide à exécuter, même avec des gants ou dans le froid.</li>
+                        <li>Fixe solidement la corde à un point d'ancrage tout en se défaisant facilement.</li>
+                        <li>Très apprécié en bushcraft et en survie.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/MSFv6NG8OnQ?si=esu4UyFQj1swF05N&amp;start=306" title="siberien" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3>Nœud de pendu</h3>
+                    <ul>
+                        <li>Coulissant, variante du slip knot, plus stable et esthétique.</li>
+                        <li>Utile pour les fixations temporaires ou les usages décoratifs.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/QyvpgA5_l08?si=mNeTF2LaunY7C-8m&amp;start=39" title="pendu" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3>Double nœud de huit (<em>Double figure-eight knot</em>)</h3>
+                    <ul>
+                        <li>Formé à partir d'un nœud de huit avec une boucle.</li>
+                        <li>Crée deux points d'attache symétriques, répartissant mieux la charge.</li>
+                        <li>Très solide, mais difficile à défaire après forte tension.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/GFlwrvggas0?si=2KNRiGd6r15wXIXE&amp" title="double_huit" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </details>
+
+                <details>
+                    <summary class="subsummary">3.2 Faire une boucle au milieu d'une ligne</summary>
+
+                    <h3 id="noeud-papillon">Papillon alpin (<em>Alpine butterfly</em>)</h3>
+                    <ul>
+                        <li><strong>"La reine des nœuds".</strong></li>
+                        <li>Forme une boucle stable au milieu d'une corde.</li>
+                        <li>Permet d'isoler une section abîmée ou de créer un point d'ancrage.</li>
+                        <li>Se fait facilement, puis se défait facilement après usage, même sous forte tension.</li>
+                        <li>Permet de bloquer une corde dans un arbre et la récupérer facilement.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/Qc89VZ9JkN0?si=XkMiPusWIfEaZ0h4" title="papillon" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3>Nœud de Prusik (<em>Prusik knot</em>)</h3>
+                    <ul>
+                        <li>Utilise une deuxième cordelette enroulée trois fois autour de la principale.</li>
+                        <li>Glisse quand il est détendu, mais se bloque sous tension.</li>
+                        <li>Indispensable pour les ascensions sur corde ou les systèmes de secours.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/vMz8Qg1uBu4?si=e9h-zfhwQ7YScnte" title="prusik" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </details>
+
+                <details>
+                    <summary class="subsummary">3.3 Sécuriser une ligne à une barre</summary>
+
+                    <h3 id="noeud-cabestan">Nœud de cabestan (<em>Clover hitch</em>)</h3>
+                    <ul>
+                        <li>Permet d'attacher rapidement une corde à un piquet, un mousqueton ou une barre.</li>
+                        <li>Facile et rapide à faire, mais peut se desserrer si la tension varie.</li>
+                        <li>Souvent renforcé avec une demi-clé supplémentaire.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/Gs9WyrzNjJs?si=BK2a_mZsvmMAHY1C" title="cabestan" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3 id="noeud-meunier">Nœud de meunier (<em>Constrictor hitch</em>)</h3>
+                    <ul>
+                        <li>Nœud de serrage très puissant, utilisé pour fermer des sacs, attacher fermement un objet.</li>
+                        <li>Presque impossible à défaire une fois tendu, sauf en relâchant la charge ; ajouter une boucle facilite son dénouement.</li>
+                        <li>Peut remplacer un collier de serrage dans certaines situations.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/4LgbkXIF0oU?si=nmCFrQdLC1xAKOod" title="meunier_1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>Peut se faire en bout de corde, mais également au milieu d'une corde.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/Y_0nANaticI?si=rffnPtJw46LIWQ13&amp;start=60" title="meunier_2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3>Nœud de grappin</h3>
+                    <ul>
+                        <li>Utilisé pour sécuriser une corde autour d'éléments métalliques ou lisses.</li>
+                        <li>Offre une excellente tenue sur surfaces glissantes.</li>
+                        <li>En général assuré par une demi-clé supplémentaire.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/19sPB2D_oR0?si=R2kPrcJRMsJ7UG_e&amp;start=35" title="grappin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3>Nœud de brigand</h3>
+                    <ul>
+                        <li>Très facile à défaire.</li>
+                        <li>La tension est sur le dormant, et il faut tirer le courant pour le défaire.</li>
+                        <li>Utilisé pour attacher les chevaux.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/RIdaZckz214?si=ON_B_wtbLOeRbiV5&amp;start=36" title="noeud-brigand" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </details>
+
+                <details>
+                    <summary class="subsummary">3.4 Attacher deux cordes entre elles</summary>
+
+                    <h3 id="noeud-ecoute">Nœud d'écoute (<em>Sheet bend</em>)</h3>
+                    <ul>
+                        <li>Relie deux cordes, même de diamètres différents.</li>
+                        <li>Souvent doublé pour plus de sécurité.</li>
+                        <li>Simple, solide et facile à défaire.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/cGR9du53P38?si=VpCyZnq-y6xReIrR&amp" title="ecoute" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3 id="noeud-zeppelin">Nœud de Zeppelin (<em>Zeppelin bend</em>)</h3>
+                    <ul>
+                        <li>Basé sur deux nœuds simples imbriqués.</li>
+                        <li>Excellente résistance à la tension et très facile à dénouer.</li>
+                        <li>Idéal pour les charges lourdes ou les cordes épaisses.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/ZR-sElJmrio?si=Irp0lBaE7vmU5PGo&amp" title="zeppelin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3>Nœud de pêcheur (<em>Fisherman's knot</em>)</h3>
+                    <ul>
+                        <li>Relie deux lignes fines, notamment des fils de pêche.</li>
+                        <li>Discret et compact, idéal pour les cordelettes et lignes synthétiques.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/z7ORr1hhRJo?si=46hnXM3c1awU5Se5&amp" title="pecheur_1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>Peut-être doublé pour bien sécuriser, notamment pour faire la boucle d'un nœud de Prusik.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/YHUv-oOMwRA?si=4RCu9MW-c3R5-P9O&amp" title="pecheur_2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </details>
+
+                <details>
+                    <summary class="subsummary">3.5 Sécuriser un objet avec une corde</summary>
+
+                    <h3 id="noeud-trucker"><em>Trucker's hitch</em></h3>
+                    <ul>
+                        <li>Permet de doubler la tension grâce à un effet de levier mécanique.</li>
+                        <li>Se bloque facilement avec une double demi-clé (<em>girth hitch</em>).</li>
+                        <li>Très utile pour arrimer une charge ou tendre une bâche.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/RK5gE-3wuGI?si=Lqx7NAnjb9EWARRe&amp" title="trucker" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3 id="noeud-jamhitch"><em>Jam hitch</em></h3>
+                    <ul>
+                        <li>Similaire au nœud tendeur, mais inversé.</li>
+                        <li>Permet de maintenir une tension autour d'un objet, tout en se défaisant très facilement.</li>
+                        <li>Peut être utilisé en guise de serre-câble.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/FeRhYhxhzVE?si=UQ1mJDjSUNAbx180&amp;start=304" title="jamhitch" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3><em>Canadian jam knot</em></h3>
+                    <ul>
+                        <li>Maintient une tension très forte sur une ligne ou un objet.</li>
+                        <li>Très efficace mais difficile à défaire sans variante avec boucle de libération.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/5lLPAHK_k6I?si=4EEaS4W0BgyOkA0O&amp;start=851" title="canadian" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>Peut être utilisé comme lien coulissant pour porter un objet :</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/qWwbZPydwu8?si=JgarRs0ZZGx2zw-I" title="canadian_2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3><em>Carrier knot</em></h3>
+                    <ul>
+                        <li>Permet de porter un objet.</li>
+                        <li>Utilise un nœud de pêcheur pour initialement lier la corde.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/AYtLw3S-3Wo?si=m-nUI1RP7YvniPdD" title="carrier_knot" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </details>
+
+                <details>
+                    <summary class="subsummary">3.6 Relier des barres entre elles</summary>
+
+                    <h3 id="transom-knot"><em>Transom knot</em></h3>
+                    <ul>
+                        <li>Relie deux barres formant un angle droit, comme dans un cadre ou une structure de campement.</li>
+                        <li>Ressemble à un nœud de meunier.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/PIh_ydM7uiM?si=eyqWRg04i_Bx93tx" title="transom" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3>Brêlage carré (<em>Square lashing</em>)</h3>
+                    <ul>
+                        <li>Relie deux barres formant un angle droit, comme dans un cadre ou une structure de campement.</li>
+                        <li>Utilise des enroulements croisés et des tours de serrage appelés frappings.</li>
+                        <li>Terminé par une demi-clé pour bloquer la tension.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/TfxOuT92BOQ?si=B_xquFn4xhaECQvV" title="deux_barres" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3>Brêlage de trois barres</h3>
+                    <ul>
+                        <li>Permet de relier trois perches pour former un trépied.</li>
+                        <li>Très utile pour construire des supports de cuisson ou des abris.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/_ystfcYBmxk?si=gnnGtl7v29BqF0vE" title="trois_barres" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </details>
+
+                <details>
+                    <summary class="subsummary">3.7 Alourdir le bout d'un cordage</summary>
+
+                    <h3 id="noeud-capucin">Nœud de capucin</h3>
+                    <ul>
+                        <li>Nœud sphérique servant à alourdir l'extrémité d'une corde pour la lancer facilement.</li>
+                        <li>Utilisé principalement comme nœud d'arrêt définitif.</li>
+                        <li>Peut aussi être décoratif ou servir de poignée.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/0VcDi0X3ckM?si=AE8ngsSTw7Ztwq-J" title="capucin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3>Nœud de lestage</h3>
+                    <ul>
+                        <li>Ajoute du poids à un cordage, souvent utilisé en pêche ou pour stabiliser une ligne.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/g4AdKQblHPg?si=mVfgYRJ_rR6rv-oS" title="lestage" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3 id="pomme-touline">Pomme de touline (<em>Monkey's fist</em>)</h3>
+                    <ul>
+                        <li>Nœud décoratif marin servant à orner les poignées ou extrémités de cordes.</li>
+                        <li>Demande de la précision, mais donne un résultat très esthétique.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/6tHy4_1EuOk?si=4883FziAtauCCrht" title="touline" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </details>
+
+                <details>
+                    <summary class="subsummary">3.8 Nœuds décoratifs</summary>
+
+                    <h3 id="tete-turc">La famille des têtes de Turc (Turk's Head Knots)</h3>
+                    <ul>
+                        <li>Ce sont des nœuds formés d'un chemin hélicoïdal autour d'un cylindre, d'une corde ou d'un objet.</li>
+                        <li>Des tressages qui reviennent sur eux-mêmes pour créer anneaux, tubes, ou boules.</li>
+                        <li>Le motif peut être doublé (2 passages) ou triplé pour plus d'épaisseur.</li>
+                        <li>Ce sont des structures très stables, décoratives, et souvent utilisées comme poignées ou nœuds d'arrêt esthétiques.</li>
+                        <li>On peut faire une perle avec une corde (<em>ranger bead</em>, inspiré du <em>celtic knot</em>) avec cette méthode :</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/CoJY3XEpw2E?si=aEop5eU36KRylf8m" title="ranger_bead_1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>ou avec cette méthode :</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/wHfC4K6lBEw?si=Y3yQNa7ztfLOzBcb&amp;start=89" title="ranger_bead_2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>ou même de manière un peu plus compliquée :</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/GwWpuH9PpDc?si=hK7LWHsleiEAM7TY&amp;start=72" title="turk_1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>Avec deux cordes, on peut faire un nœud de sifflet de Bosco (<em>diamond knot</em> ou <em>lanyard knot</em>), qui peut être utilisé comme nœud d'arrêt solide pour terminer une dragonne ou un porte-clé. C'est une variation sur le nœud de Carrick.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/P1pEvOrPGmo?si=H9NScwCjz4cEI66Q&amp;start=16" title="sifflet_bosco" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>On peut l'ajuster facilement :</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/iOyGe0_IYD0?si=jffVer940xWisZ7C&amp;start=115" title="diamant" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>On peut faire une déclinaison du tête de turc avec quatre cordes, ça rend super bien.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/8OPuCrF3TIg?si=_7esGLjWd3nN-1hz&amp;start=172" title="turk_2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>Ou bien dans sa version plus "classique", on retrouve le bonnet turc 3x4 (3 spires, 4 ganses).</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/nlc-0h-fkZU?si=rMenraUYiY7cYEb3&amp;start=35" title="turk_3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3>Croix du marin</h3>
+                    <ul>
+                        <li>Un nœud décoratif à trois boucles qui forme une croix.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/ikcVqAEyVbk?si=T1msyPsUvJCuqViX&amp;start=29" title="croix-marin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3><em>Prosperity knot</em></h3>
+                    <ul>
+                        <li>Un super joli nœud, qui a comme base le nœud de Carrick, comme le sifflet de Bosco.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/d-hTvyIESfQ?si=9VI5uwVdS__cPkoj&amp;start=423" title="prosperity_knot" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3 id="croix-chinoise">Croix chinoise</h3>
+                    <ul>
+                        <li>Une très jolie manière de nouer un foulard par exemple.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/elmXUTdG5w4?si=WRWZraUE_VM5PhDc&amp;start=20" title="croix_chinoise" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>                
+                    </div>
+                </details>
+
+                <details>
+                    <summary class="subsummary">3.9 Nœuds divers et pratiques</summary>
+
+                    <h3>Cordage lové</h3>
+                    <ul>
+                        <li>Méthode de rangement évitant les torsions dans la corde.</li>
+                        <li>Consiste à enrouler les brins en boucles régulières puis à bloquer l'ensemble.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/03P1nHsr1XE?si=tI1fzH5I793yaGfk&amp" title="cordage_love" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3>Nœud d'hameçon</h3>
+                    <ul>
+                        <li>Fixe solidement un hameçon à une ligne de pêche.</li>
+                        <li>Plusieurs variantes existent selon le type de fil utilisé.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/AyWdXU32vzE?si=efPlFONluEWeGSRf&amp" title="hamecon" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </details>
+            </details>
+
+            <details>
+                <summary>4. Enchaînements et motifs</summary>
+
+                <details>
+                    <summary class="subsummary">4.1 Tresses</summary>
+
+                    <h3>Tresse plate</h3>
+                    <ul>
+                        <li>Un motif très simple pour épaissir un cordage en joignant plusieurs cordes.</li>
+                        <li>Peut s'effectuer à partir de 3 cordes.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/WMN8EBr5-FY?si=Y4MFH5_XnAVKXj1f" title="tresse_plate" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3>Tresse non plate</h3>
+                    <ul>
+                        <li>Une tresse plus épaisse que la tresse plate.</li>
+                        <li>Peut être réalisée de manière similaire à la tresse plate :</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/8OPuCrF3TIg?si=bqtKPCSx3l-rkfIH&amp;start=519" title="braid" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>Ou de manière complètement différente en scoubidou par exemple, pour convertir des cordages longs en chaînette décorative. <i>NB : il est intéressant de noter que le motif scoubidou correspond au nœud "tête-de-more" (dont l'inverse est le "cul-de-porc").</i></li>
+                    </ul>
+                </details>
+
+                <details>
+                    <summary class="subsummary">4.2 Motifs en ligne</summary>
+                
+                    <h3 id="chainette">Chaînette (<em>Daisy chain</em>)</h3>
+                    <ul>
+                        <li>Permet d'enrouler une corde proprement à l'aide d'une succession de nœuds coulants.</li>
+                        <li>Idéal pour le rangement rapide ou pour créer des longueurs ajustables.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/XZ6CktUyZwI?si=SN9VnmV3Rxzw0m0z&amp" title="daisy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3 id="solomon-bar"><em>Solomon bar / cobra knot</em></h3>
+                    <ul>
+                        <li>C'est une série de nœuds simples autour d'une boucle.</li>
+                        <li>Se réalise avec une ou deux cordes.</li>
+                        <li>A un rendu assez agréable en main, et très fin.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/d-hTvyIESfQ?si=9VI5uwVdS__cPkoj&amp;start=146" title="solomon_bar" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>En le faisant toujours du même côté, on se retrouve avec un joli motif, qui ressemble à un brin d'ADN.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/bkco-UTgHcM?si=dV687e1N7xMlf0aO&amp;start=75" title="solomon_bar_dna" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3 id="zipper-sinnet"><em>Zipper sinnet</em></h3>
+                    <ul>
+                        <li>Une série de nœuds coulants qui forment un joli motif organique.</li>
+                        <li>Se défait instantanément en tirant sur les deux brins.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/d-hTvyIESfQ?si=9VI5uwVdS__cPkoj&amp;start=200" title="zipper_sinnet" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3 id="snake-knot"><em>Snake knot</em></h3>
+                    <ul>
+                        <li>Une série de nœuds assez simples.</li>
+                        <li>Crée une forme assez ronde et confortable, donc utilisable pour faire un poignée par exemple.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/d-hTvyIESfQ?si=9VI5uwVdS__cPkoj&amp;start=598" title="snake_knot" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3><em>Spindle fiber bar</em></h3>
+                    <ul>
+                        <li>Une série de demi-clés faites autour de deux brins.</li>
+                        <li>Facilement utilisable pour customiser deux brins nus, ou les rendre plus confortables en main.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/d-hTvyIESfQ?si=9VI5uwVdS__cPkoj&amp;start=702" title="spindle_fiber" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>Les demi-clés sont super pratiques, et on peut faire d'autres motifs, type tête d'alouette :</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/d-hTvyIESfQ?si=9VI5uwVdS__cPkoj&amp;start=829" title="snow_googles" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3><em>Backbone bar (1D, 2D, et 3D)</em></h3>
+                    <ul>
+                        <li>Une série de nœuds coulants, autour de deux brins (un peu comme avec une machine à coudre).</li>
+                        <li>Peut-être réalisé en ligne :</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/d-hTvyIESfQ?si=9VI5uwVdS__cPkoj&amp;start=940" title="backbone_bar" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>ou sur un plan :</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/d-hTvyIESfQ?si=9VI5uwVdS__cPkoj&amp;start=994" title="backbone_bar_2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>On peut même réaliser des objets beaucoup plus complexes.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/d-hTvyIESfQ?si=9VI5uwVdS__cPkoj&amp;start=1069" title="backbone_bar_3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </details>
+
+                <details>
+                    <summary class="subsummary">4.3 Motifs en plan</summary>
+
+                    <h3>Tissage (<em>weaving</em>)</h3>
+                    <ul>
+                        <li>Consiste à simplement passer une corde dans différentes boucles.</li>
+                        <li>Peut être réalisé avec une seule corde :</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/1DmWKwy_Ndw?si=dODS_E4HJl64SRbs&amp;start=119" title="slingshot" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>ou avec plusieurs cordes :</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/01b-wLuZcIw?si=04-BivpZHGGLZLBf&amp;start=566" title="pouch" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3>Nœuds de conquistador</h3>
+                    <ul>
+                        <li>Contrairement au tissage, on peut étendre facilement le motif de conquistador, puisqu'il ne dépend pas de boucles.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/xj7e4X9dpVw?si=KqkyC8qC7sO0P5tV" title="conquistador" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3 id="filet">Faire un filet</h3>
+                    <ul>
+                        <li>Avec plusieurs cordes.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/kti0UXeoMUA?si=pbqBnnvjf-h6YRx9" title="filet_1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>Avec une seule corde.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/MiGTTH0M6lg?si=_gY9vkzkOv-z1FMb" title="filet_2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+
+                    <h3>Baderne</h3>
+                    <ul>
+                        <li>Un nœud plat qui nécessite une très grande longueur de cordage.</li>
+                        <li>Utilisé pour faire des tapis décoratifs.</li>
+                        <li>Utiliser de la corde fine pour un sous-verre, et de la corde plus grosse pour un paillasson.</li>
+                    </ul>
+                    <div class="videowrapper">
+                        <iframe loading="lazy" src="https://www.youtube.com/embed/oDjtTt4JlNE?si=fhRULMtKO95IZ-DL&amp;start=36" title="baderne" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </details>
+            </details>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+
+                // Pour chaque lien interne
+                document.querySelectorAll('a[href^="#"]').forEach(link => {
+                    link.addEventListener("click", (e) => {
+
+                        const targetId = link.getAttribute("href").substring(1);
+                        const targetEl = document.getElementById(targetId);
+                        if (!targetEl) return;
+
+                        // OUVRE tous les <details> parents si fermés
+                        let parent = targetEl.parentElement;
+                        while (parent) {
+                            if (parent.tagName.toLowerCase() === "details") {
+                                parent.setAttribute("open", "");
+                            }
+                            parent = parent.parentElement;
+                        }
+
+                        // Laisse le temps à iOS de calculer la nouvelle hauteur
+                        setTimeout(() => {
+                            targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }, 50);
+
+                    });
+                });
+
+            });
+        </script>
+
+    </body>
+</html>
